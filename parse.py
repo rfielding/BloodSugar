@@ -46,8 +46,10 @@ def headerParse(f):
   parsed["names"] = parseLine(f)
   dateRange = parseLine(f)
 
+#Medtronic dates have 1 digit months and days, so this is simpler
+#Generate a lexically sortable data ffs...
 def genDate(s):
-    m = ts_re.match(s).groups()
+    m = parsed["re"].match(s).groups()
     ts = ("%02d/%02d/%02d %02d:%02d:%02d") % (int(m[2]), int(m[1]), int(m[0]), int(m[3]), int(m[4]), int(m[5]))
     return ts
 
@@ -55,20 +57,8 @@ def nvPair(ts, col, cols):
   colName = parsed["names"][col]
   colVal  = cols[col]
   print ts + " " + str(col) + ":" + colName+": "+colVal
-  
-def parseEvent(ts, col, cols, colName, colVal):
-  #On a wizard estimate, take note of what it says for all parms
-  if col==5:
-    nvPair(ts, 5, cols)
-    parsed["bg"] = int(cols[5])
-    if "bgw" in parsed and parsed["bgw"] > 0 and "carb" in parsed and parsed["carb"] > 0:
-      wrong = parsed["bg"] - parsed["bgw"]
-      actual = parsed["cir"] * parsed["insulin"] + parsed["cir"] * (1.0 * wrong) / parsed["sir"]
-      actualerr = actual - parsed["carb"]
-      print parsed["lastwiz"] + " -1:actualfood: " + str(actual)
-      print parsed["lastwiz"] + " -1:actualerr: " + str(actualerr)
-      del(parsed["bgw"])
-  if col==18:
+
+def handleBolusWizardUsed(ts,col, cols):
     nvPair(ts, 0, cols)  
     nvPair(ts, 18, cols)  
     nvPair(ts, 19, cols)  
@@ -87,6 +77,24 @@ def parseEvent(ts, col, cols, colName, colVal):
     parsed["sir"] = int(cols[22])
     parsed["carb"] = int(cols[23])
     parsed["bgw"] = int(cols[24])
+
+def handleMeterReading(ts, col, cols):
+    nvPair(ts, 5, cols)
+    parsed["bg"] = int(cols[5])
+    if "bgw" in parsed and parsed["bgw"] > 0 and "carb" in parsed and parsed["carb"] > 0:
+      wrong = parsed["bg"] - parsed["bgw"]
+      actual = parsed["cir"] * parsed["insulin"] + parsed["cir"] * (1.0 * wrong) / parsed["sir"]
+      actualerr = actual - parsed["carb"]
+      print parsed["lastwiz"] + " -1:actualfood: " + str(actual)
+      print parsed["lastwiz"] + " -1:actualerr: " + str(actualerr)
+      del(parsed["bgw"])
+  
+def parseEvent(ts, col, cols, colName, colVal):
+  #On a wizard estimate, take note of what it says for all parms
+  if col==5:
+    handleMeterReading(ts, col, cols)
+  if col==18:
+    handleBolusWizardUsed(ts, col, cols)
  
 #Generate an event for each column type 
 def parseRow(f):
@@ -113,6 +121,6 @@ def medtronicParse(inFile):
   f.close()
 
 parsed = {}
-ts_re = re.compile('^(\d{1,2})/(\d{1,2})/(\d{2}) (\d{2}):(\d{2}):(\d{2})')
+parsed["re"] = re.compile('^(\d{1,2})/(\d{1,2})/(\d{2}) (\d{2}):(\d{2}):(\d{2})')
 
 medtronicParse("data.csv")
