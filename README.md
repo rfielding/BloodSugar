@@ -35,6 +35,6 @@ But if we take a reading later and we did not land at T, but instead landed at a
     I + (L-R)/SIR = G/CIR
     CIR*I + CIR/SIR*(L-R) = G
 
-So, that's a revised estimate of carbs.  It requires that we get data from the bolus wizard, and use a blood sugar reading a few hours later and combine to figure out G.
+So, that's a revised estimate of carbs.  It requires that we get data from the bolus wizard, and use a blood sugar reading a few hours later and combine to figure out G.  We can take the standard data and enhance it with derived variables like this.  Perhaps the output of the Python script should be generating something suitable for gnuplot or Google Charts.  This is something I am still working on.
 
 
