@@ -1,6 +1,7 @@
 import io
 import time
 import re
+import math
 
 #An FSM to handle the quotes correctly
 def parseLine(f):
@@ -80,7 +81,12 @@ def handleMeterReading(ts, col, cols):
     if "bgw" in parsed and parsed["bgw"] > 0 and "carb" in parsed and parsed["carb"] > 0:
       wrong = parsed["bg"] - parsed["bgw"]
       actual = parsed["cir"] * parsed["insulin"] + parsed["cir"] * (1.0 * wrong) / parsed["sir"]
-      actualerr = int( 100 * ( float(actual - parsed["carb"])/actual) )
+      actualerrf = float(actual - parsed["carb"])/actual
+      actualerr = int( 100 * actualerrf )
+      if not ( parsed["sumcount"] in parsed["carberr"]):
+        parsed["carberr"][ parsed["sumcount"] ] = 0 
+      parsed["carberr"][ parsed["sumcount"] ] = parsed["carberr"][ parsed["sumcount"] ] + actualerrf
+      parsed["sumcount"] = parsed["sumcount"] + 1
       print parsed["lastwiz"] + " -1:actualfood: " + str(actual)
       print parsed["lastwiz"] + " -1:actualerr: " + str(actualerr) + "%"
       del(parsed["bgw"])
@@ -115,7 +121,30 @@ def medtronicParse(inFile):
     row = parseRow(f)
   f.close()
 
+#A shaky stand-in until I get better stats ideas
+def statsReport():
+  C = parsed["sumcount"]
+  total = 0.0
+  i = 0
+  while i < C:
+    total = total + parsed["carberr"][i]
+    i = i + 1
+  mean = total/C
+  total = 0
+  i = 0
+  while i < C:
+    d = parsed["carberr"][i] - mean
+    total = total + d*d
+    i = i + 1
+  variance = total/C
+  stddev = math.sqrt(variance)
+  print "mean   carb pct error: " + str(mean)
+  print "stddev carb pct error: " + str(stddev)
+
 parsed = {}
+parsed["sumcount"] = 0
+parsed["carberr"] = {}
 parsed["re"] = re.compile('^(\d{1,2})/(\d{1,2})/(\d{2}) (\d{2}):(\d{2}):(\d{2})')
 
 medtronicParse("data.csv")
+statsReport()
