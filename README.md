@@ -12,3 +12,15 @@ It's a simple matter of:
 * Recompute the carb/sugar/insulin equation with the updated sugar reading a few hours later, to treat the actual sugar as the target sugar and the carbs as the variable to be solved for
 
 It's just a simple Python script for now.  I'm maintaining this code up on github just in case there is somebody else that wants to start creating tools for the pump.  The main problems I have right now are carb counting and data duplication being created when you try to use the tools.  Some form of carb regression should probably be a feature along with the bolus wizard.  The insulin dosage is essentially a prediction made about where sugar will be in the future.  If this prediction is wrong, then one of the input variables needs revision; and as far as I can tell, it's almost always the carb input that is at fault.
+Example:
+
+12/01/10 16:59:22 18:BWZ Estimate (U): 13.6
+12/01/10 16:59:22 19:BWZ Target High BG (mg/dL): 120
+12/01/10 16:59:22 21:BWZ Carb Ratio (grams): 4
+12/01/10 16:59:22 22:BWZ Insulin Sensitivity (mg/dL): 15
+12/01/10 16:59:22 23:BWZ Carb Input (grams): 60
+12/01/10 16:59:22 24:BWZ BG Input (mg/dL): 100
+12/01/10 18:45:17 5:BG Reading (mg/dL): 150
+12/01/10 16:59:22 -1:actualfood: 67.7333333333
+12/01/10 16:59:22 -1:actualerr: 7.73333333333
+
