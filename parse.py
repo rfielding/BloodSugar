@@ -59,17 +59,13 @@ def nvPair(ts, col, cols):
   print ts + " " + str(col) + ":" + colName+": "+colVal
 
 def handleBolusWizardUsed(ts,col, cols):
-    nvPair(ts, 0, cols)  
-    nvPair(ts, 18, cols)  
-    nvPair(ts, 19, cols)  
-    #nvPair(ts, 20, cols)  
-    nvPair(ts, 21, cols)  
-    nvPair(ts, 22, cols)  
+    #nvPair(ts, 0, cols)  
+    #nvPair(ts, 18, cols)  
+    #nvPair(ts, 19, cols)  
+    #nvPair(ts, 21, cols)  
+    #nvPair(ts, 22, cols)  
     nvPair(ts, 23, cols)  
     nvPair(ts, 24, cols)  
-    #nvPair(ts, 25, cols)  
-    #nvPair(ts, 26, cols)  
-    #nvPair(ts, 27, cols)  
     parsed["lastwiz"] = ts
     parsed["insulin"] = float(cols[18])
     parsed["lastbg"] = int(cols[19])
