@@ -47,7 +47,7 @@ def headerParse(f):
   dateRange = parseLine(f)
 
 #Medtronic dates have 1 digit months and days, so this is simpler
-#Generate a lexically sortable data ffs...
+#Generate a lexically sortable date ffs...
 def genDate(s):
     m = parsed["re"].match(s).groups()
     ts = ("%02d/%02d/%02d %02d:%02d:%02d") % (int(m[2]), int(m[1]), int(m[0]), int(m[3]), int(m[4]), int(m[5]))
@@ -84,9 +84,9 @@ def handleMeterReading(ts, col, cols):
     if "bgw" in parsed and parsed["bgw"] > 0 and "carb" in parsed and parsed["carb"] > 0:
       wrong = parsed["bg"] - parsed["bgw"]
       actual = parsed["cir"] * parsed["insulin"] + parsed["cir"] * (1.0 * wrong) / parsed["sir"]
-      actualerr = actual - parsed["carb"]
+      actualerr = int( 100 * ( float(actual - parsed["carb"])/actual) )
       print parsed["lastwiz"] + " -1:actualfood: " + str(actual)
-      print parsed["lastwiz"] + " -1:actualerr: " + str(actualerr)
+      print parsed["lastwiz"] + " -1:actualerr: " + str(actualerr) + "%"
       del(parsed["bgw"])
   
 def parseEvent(ts, col, cols, colName, colVal):
@@ -107,7 +107,6 @@ def parseRow(f):
       colVal  = cols[col]
       if colVal:
         parseEvent(ts, col, cols, colName, colVal)
-        #nvPair(ts, col, cols)
       col = col + 1
   return cols
 
