@@ -61,7 +61,7 @@ def parseEvent(ts, col, cols, colName, colVal):
   if col==5:
     nvPair(ts, 5, cols)
     parsed["bg"] = int(cols[5])
-    if "bgw" in parsed:
+    if "bgw" in parsed and parsed["bgw"] > 0 and "carb" in parsed and parsed["carb"] > 0:
       wrong = parsed["bg"] - parsed["bgw"]
       actual = parsed["cir"] * parsed["insulin"] + parsed["cir"] * (1.0 * wrong) / parsed["sir"]
       actualerr = actual - parsed["carb"]
