@@ -24,4 +24,17 @@ Example:
     12/01/10 16:59:22 -1:actualfood: 67.7333333333
     12/01/10 16:59:22 -1:actualerr: 7.73333333333
 
+The estimates are based on trivial formulas that you should be able to do in your head after a while.  The first is how much to inject based on where your sugar is, and how many carbohydrates you think you are eating:
+
+    //Insulin = Food/CarbToInsulinRatio + (Reading-Target)/SugarToInsulinRatio
+    I = F/CIR + (R-T)/SIR
+
+But if we take a reading later and we did not land at T, but instead landed at another value L, then we can just replace variable F with a variable G.  G is our revised estimate of the grams of carb that we ate, while L is the landing (rather than Target) sugar:
+
+    I = G/CIR + (R-L)/SIR
+    I + (L-R)/SIR = G/CIR
+    CIR*I + CIR/SIR*(L-R) = G
+
+So, that's a revised estimate of carbs.  It requires that we get data from the bolus wizard, and use a blood sugar reading a few hours later and combine to figure out G.
+
 
