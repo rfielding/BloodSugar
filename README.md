@@ -14,28 +14,33 @@ It's a simple matter of:
 It's just a simple Python script for now.  I'm maintaining this code up on github just in case there is somebody else that wants to start creating tools for the pump.  The main problems I have right now are carb counting and data duplication being created when you try to use the tools.  Some form of carb regression should probably be a feature along with the bolus wizard.  The insulin dosage is essentially a prediction made about where sugar will be in the future.  If this prediction is wrong, then one of the input variables needs revision; and as far as I can tell, it's almost always the carb input that is at fault.
 Example:
 
-    12/01/10 12:54:51 5:BG Reading (mg/dL): 72
-    12/01/10 15:20:55 5:BG Reading (mg/dL): 79
-    12/01/10 15:51:02 0:Index: 14
-    12/01/10 15:51:02 18:BWZ Estimate (U): 7.5
-    12/01/10 15:51:02 19:BWZ Target High BG (mg/dL): 120
-    12/01/10 15:51:02 21:BWZ Carb Ratio (grams): 4
-    12/01/10 15:51:02 22:BWZ Insulin Sensitivity (mg/dL): 15
-    12/01/10 15:51:02 23:BWZ Carb Input (grams): 30
-    12/01/10 15:51:02 24:BWZ BG Input (mg/dL): 0
-    12/01/10 16:32:13 5:BG Reading (mg/dL): 98
-    12/01/10 15:51:02 -1:actualfood: 56.1333333333
-    12/01/10 15:51:02 -1:actualerr: 26.1333333333
-    12/01/10 16:59:22 0:Index: 30
-    12/01/10 16:59:22 18:BWZ Estimate (U): 13.6
-    12/01/10 16:59:22 19:BWZ Target High BG (mg/dL): 120
-    12/01/10 16:59:22 21:BWZ Carb Ratio (grams): 4
-    12/01/10 16:59:22 22:BWZ Insulin Sensitivity (mg/dL): 15
-    12/01/10 16:59:22 23:BWZ Carb Input (grams): 60
-    12/01/10 16:59:22 24:BWZ BG Input (mg/dL): 100
-    12/01/10 18:45:17 5:BG Reading (mg/dL): 150
-    12/01/10 16:59:22 -1:actualfood: 67.7333333333
-    12/01/10 16:59:22 -1:actualerr: 7.73333333333
+    12/06/10 10:08:05 5:BG Reading (mg/dL): 85
+    12/06/10 10:10:25 23:BWZ Carb Input (grams): 40
+    12/06/10 10:10:25 24:BWZ BG Input (mg/dL): 85
+    12/06/10 14:14:21 5:BG Reading (mg/dL): 154
+    12/06/10 10:10:25 -1:actualfood: 48.8
+    12/06/10 10:10:25 -1:actualerr: 18%
+    12/06/10 14:14:34 23:BWZ Carb Input (grams): 30
+    12/06/10 14:14:34 24:BWZ BG Input (mg/dL): 154
+    12/06/10 17:16:37 5:BG Reading (mg/dL): 160
+    12/06/10 14:14:34 -1:actualfood: 40.4
+    12/06/10 14:14:34 -1:actualerr: 25%
+    12/06/10 19:26:39 5:BG Reading (mg/dL): 143
+    12/06/10 19:27:33 23:BWZ Carb Input (grams): 60
+    12/06/10 19:27:33 24:BWZ BG Input (mg/dL): 143
+    12/06/10 19:52:10 23:BWZ Carb Input (grams): 60
+    12/06/10 19:52:10 24:BWZ BG Input (mg/dL): 154
+    12/06/10 22:48:37 5:BG Reading (mg/dL): 95
+    12/06/10 19:52:10 -1:actualfood: 53.0666666667
+    12/06/10 19:52:10 -1:actualerr: -13%
+    12/06/10 23:48:27 5:BG Reading (mg/dL): 107
+    12/07/10 01:40:45 5:BG Reading (mg/dL): 86
+    12/07/10 09:31:05 5:BG Reading (mg/dL): 68
+    12/07/10 10:21:26 23:BWZ Carb Input (grams): 65
+    12/07/10 10:21:26 24:BWZ BG Input (mg/dL): 70
+    12/07/10 13:10:01 5:BG Reading (mg/dL): 115
+    12/07/10 10:21:26 -1:actualfood: 63.2
+    12/07/10 10:21:26 -1:actualerr: -2%
 
 
 The estimates are based on trivial formulas that you should be able to do in your head after a while.  The first is how much to inject based on where your sugar is, and how many carbohydrates you think you are eating:

@@ -146,5 +146,7 @@ parsed["sumcount"] = 0
 parsed["carberr"] = {}
 parsed["re"] = re.compile('^(\d{1,2})/(\d{1,2})/(\d{2}) (\d{2}):(\d{2}):(\d{2})')
 
+
 medtronicParse("data.csv")
 statsReport()
+
