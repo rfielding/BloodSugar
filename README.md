@@ -18,29 +18,29 @@ Example:
     12/06/10 10:10:25 23:BWZ Carb Input (grams): 40
     12/06/10 10:10:25 24:BWZ BG Input (mg/dL): 85
     12/06/10 14:14:21 5:BG Reading (mg/dL): 154
-    *12/06/10 10:10:25 -1:actualfood: 48.8*
-    *12/06/10 10:10:25 -1:actualerr: 18%*
+    12/06/10 10:10:25 -1:actualfood: 48.8
+    12/06/10 10:10:25 -1:actualerr: 18%
     12/06/10 14:14:34 23:BWZ Carb Input (grams): 30
     12/06/10 14:14:34 24:BWZ BG Input (mg/dL): 154
     12/06/10 17:16:37 5:BG Reading (mg/dL): 160
-    *12/06/10 14:14:34 -1:actualfood: 40.4*
-    *12/06/10 14:14:34 -1:actualerr: 25%*
+    12/06/10 14:14:34 -1:actualfood: 40.4
+    12/06/10 14:14:34 -1:actualerr: 25%
     12/06/10 19:26:39 5:BG Reading (mg/dL): 143
     12/06/10 19:27:33 23:BWZ Carb Input (grams): 60
     12/06/10 19:27:33 24:BWZ BG Input (mg/dL): 143
     12/06/10 19:52:10 23:BWZ Carb Input (grams): 60
     12/06/10 19:52:10 24:BWZ BG Input (mg/dL): 154
     12/06/10 22:48:37 5:BG Reading (mg/dL): 95
-    *12/06/10 19:52:10 -1:actualfood: 53.0666666667*
-    *12/06/10 19:52:10 -1:actualerr: -13%*
+    12/06/10 19:52:10 -1:actualfood: 53.0666666667
+    12/06/10 19:52:10 -1:actualerr: -13%
     12/06/10 23:48:27 5:BG Reading (mg/dL): 107
     12/07/10 01:40:45 5:BG Reading (mg/dL): 86
     12/07/10 09:31:05 5:BG Reading (mg/dL): 68
     12/07/10 10:21:26 23:BWZ Carb Input (grams): 65
     12/07/10 10:21:26 24:BWZ BG Input (mg/dL): 70
     12/07/10 13:10:01 5:BG Reading (mg/dL): 115
-    *12/07/10 10:21:26 -1:actualfood: 63.2*
-    *12/07/10 10:21:26 -1:actualerr: -2%*
+    12/07/10 10:21:26 -1:actualfood: 63.2
+    12/07/10 10:21:26 -1:actualerr: -2%
 
 
 The estimates are based on trivial formulas that you should be able to do in your head after a while.  The first is how much to inject based on where your sugar is, and how many carbohydrates you think you are eating:
